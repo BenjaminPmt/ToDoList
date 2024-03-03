@@ -1,17 +1,20 @@
 import { View, Text,StyleSheet } from 'react-native'
-export default function CardTask() {
+export default function CardTask({name}) {
   return (
-    <View style={styles.cardContainer}>
-      <Text>CardTask</Text>
+    <View style={styles.items}>
+      <Text style={styles.element}>{name}</Text>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-    cardContainer: {
-      height : 120,
-      width : 120,
-      backgroundColor : '#aaa',
-      borderRadius : 15,
+    items:{
+      marginTop : 10,
     },
+    element:{
+      backgroundColor : '#113264',
+      padding : 20,
+      fontSize : 20,
+      marginVertical : 5,
+    }
   });

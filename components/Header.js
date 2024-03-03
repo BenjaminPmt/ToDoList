@@ -19,7 +19,7 @@ export default function Header() {
 
 const styles = StyleSheet.create({
     headerContainer: {
-    height: 210,
+    height: 150,
     backgroundColor: '#1F2D5C',
     flexDirection: 'collum', // Organise les enfants en ligne.
     justifyContent: 'space-between', // Répartit les enfants aux extrémités du conteneur.
@@ -30,20 +30,19 @@ const styles = StyleSheet.create({
       flexDirection : "column"
     },
     dateContainer : {
-        height : 70,
+        height : 30,
         alignItems : 'flex-start',
         justifyContent : 'center'
 
     },
     imageContainer: {
-      height : 140,
+      height : 100,
       flexDirection : "row",
         justifyContent:'space-between',
         padding : 20,
         width : '100%',
       },
       image: {
-        
         width: 50, // Ajustez selon la taille souhaitée.
         height: 50, // Ajustez selon la taille souhaitée.
         borderRadius : 10,
