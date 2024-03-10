@@ -1,16 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+
 import Home from './pages/Home';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
-import FormTask from './components/FormTask';
+import FormAddTask from './pages/FormAddTask';
 
-
-
-const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 export default function App() {
   return (
@@ -42,7 +38,7 @@ function BottomTabNavigator() {
     >
       
       <Tab.Screen name="Accueil" component={Home} />
-      <Tab.Screen name='Ajout' component={FormTask} />
+      <Tab.Screen name='Ajout' component={FormAddTask} />
       {/* Ajoute d'autres écrans de la Tab.Navigator si nécessaire */}
     </Tab.Navigator>
      );

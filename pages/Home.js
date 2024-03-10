@@ -1,12 +1,11 @@
 // This page is for see all the task and add the task when you click on the button +
-import { View, Text, FlatList, StyleSheet, Pressable } from 'react-native'
+import { View, Text, FlatList, StyleSheet, Pressable, ScrollView, SafeAreaView } from 'react-native'
 import { useEffect, useState } from 'react'
-import CardTask from '../components/CardTask'
 import Header from '../components/Header'
 import TasksFilter from '../components/TasksFilter'
 import { getTasks, sqliteInit, deleteTasks } from '../database/db'
 import { AntDesign } from '@expo/vector-icons';
-export default function Home() {
+export default function Home({navigation}) {
 
   const [tasks, setTasks] = useState([]);
 
@@ -19,6 +18,13 @@ export default function Home() {
     });
   }, []);
 
+  useEffect(() => {
+    const focusOnTheTasks = navigation.addListener('focus', () => {
+      loadTasks();
+    });
+
+    return focusOnTheTasks;
+  }, [navigation]);
   const loadTasks = () => {
     getTasks().then((loadedTasks) => {
       setTasks(loadedTasks);
@@ -35,6 +41,7 @@ export default function Home() {
     <View>
       <Header />
       <TasksFilter />
+      <SafeAreaView style={styles.containerTasks}>
       <FlatList 
 
         data={tasks}
@@ -49,6 +56,7 @@ export default function Home() {
         )}
         keyExtractor={item => item.id.toString()}
       />
+      </SafeAreaView>
     </View>
   )
 }
@@ -64,5 +72,9 @@ const styles = StyleSheet.create({
   },
   text:{
     color: "white",
+  },
+  containerTasks:{
+    height : 600,
+    // backgroundColor : 'purple',
   }
 });

@@ -1,12 +1,15 @@
-import { View, Text, StyleSheet, TextInput, Button, Alert, FlatList, Modal, Pressable } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Button, Alert, Modal, Pressable, TouchableOpacity} from 'react-native';
 import { useState, useEffect } from 'react';
-import Header from './Header';
-import { sqliteInit, addTask } from '../database/db'; // Import ajusté
-import { NavigationContainer } from '@react-navigation/native';
+import Header from '../components/Header';
+import { sqliteInit, addTask, getTasks} from '../database/db'; // Import ajusté
+import ModalTwoBtn from '../components/ModalTwoBtn';
+import ModalOneBtn from '../components/ModalOneBtn';
 
-export default function FormTask({navigation}) {
+
+export default function FormAddTask({navigation}) {
   const [task, setTask] = useState('');
   const [modal, setModal] = useState(false)
+  const [modalNoTask, setModalNoTask] = useState(false)
 
   useEffect(() => {
     sqliteInit().then(() => {
@@ -19,7 +22,7 @@ export default function FormTask({navigation}) {
 
   const handleAddTask = async () => {
     if (task.trim() === '') {
-      Alert.alert('Erreur', 'Veuillez entrer une tâche.');
+      setModalNoTask(true)
       return;
     }
     await addTask(task)
@@ -35,33 +38,30 @@ export default function FormTask({navigation}) {
     navigation.navigate('Accueil')
     setModal(false)
   }
+  const backModal = () => {
+    setModal(false);
+    setModalNoTask(false)
+  }
   return (
     <View>
       <Header />
-      <Modal
+      <ModalOneBtn 
+        visible={modalNoTask}
+        titleHeader="Pas de tache"
+        textBodyModal="Vous devez mettre au moins 1 caractere pour la creation de la tache"
+        textBtn="Retour"
+        onPressBtn={backModal}
+        />
+      <ModalTwoBtn
         visible={modal}
-        animationType='slide'
-        transparent={true}
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-          <View style={styles.header}>
-            <Text style={styles.textHeader}>header modal</Text>
-          </View>
-          <View style={styles.modalBody}>
-            <Text style={styles.textBody}>Votre tache vient d'etre ajouter. Que voulez vous faire ?</Text>
-          </View>
-          <View style={styles.modalFooter}>
-            <Pressable style={styles.modalPressableBack} onPress={()=> setModal(false)}>
-              <Text style={styles.btnText}>Retour</Text>
-            </Pressable>
-            <Pressable style={styles.modalPressable} onPress={goToHome}>
-              <Text style={styles.btnText}>Voir mes taches</Text>
-            </Pressable>
-          </View>
-          </View>
-        </View>
-      </Modal>
+        titleHeader="Tache ajoutée"
+        textBodyModal="Votre tache vient d'etre ajoutée. Que voulez-vous faire ?"
+        btnLeft="Retour"
+        btnRight="Voir mes taches"
+        goToHome={goToHome}
+        backToAdd={backModal}
+      />
+      
       <TextInput
         style={styles.input}
         placeholder="Ajouter une tâche"
@@ -82,8 +82,7 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
-  },
-  modalContainer :{
+  },modalContainer :{
     flex : 1,
     justifyContent: "center",
     alignItems : 'center',
@@ -137,12 +136,16 @@ const styles = StyleSheet.create({
     borderRightWidth : 2,
     borderColor : 'white'
   },
+  separateBtn:{
+    width : 3,
+    height : 20,
+    backgroundColor : 'white'
+  },
   btnText: {
     fontSize : 20,
     color: 'white',
     fontWeight :'700',
     textAlign :'center'
   }
-
-  
+ 
 });
