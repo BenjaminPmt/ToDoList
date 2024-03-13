@@ -22,13 +22,13 @@ function BottomTabNavigator() {
       initialRouteName="Home"
       screenOptions={({ route }) => ({
         tabBarStyle : {backgroundColor: '#1F2D5C'},
-        tabBarLabelStyle:{color:'#AAAA', fontSize: 13, paddingBottom:2},
+        tabBarLabelStyle:{color:'#FFFF', fontSize: 13, padding : 1},
         headerShown: false,
         tabBarIcon: ({ focused, color, size, }) => {
           let iconName;
           if (route.name === 'Accueil') {
             iconName = 'home';
-            return <Ionicons name="home" size={28} color={'#FFFF'} />;
+            return <Ionicons name="home" size={24} color={'#FFFF'} />;
           }else if(route.name === "Ajout"){
             iconName = 'plus';
             return <FontAwesome name="plus" size={24} color={'#FFFF'} />;

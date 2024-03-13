@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, StyleSheet } from 'react-native'
+import { View, Text, ScrollView, StyleSheet, Pressable } from 'react-native'
 export default function TasksFilter() {
 
   const filter = [
@@ -22,9 +22,9 @@ export default function TasksFilter() {
                 const backgroundColor = index === 0 ? '#3A5BC7' : '#1F2D5C';
           const textColor = index === 0 ? '#1F2D5C' : '#FFFF';
                 return(
-                    <View key={index} style={[styles.filterItem,{ backgroundColor },]}  >
+                    <Pressable key={index} style={[styles.filterItem,{ backgroundColor },]}  >
                         <Text style={[styles.text, { color: textColor }]}>{category.category}</Text>
-                    </View>
+                    </Pressable>
                 )
             })
         }

@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native'
-import { useState } from 'react';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import { Ionicons } from '@expo/vector-icons';
+
+
 export default function TodayDate() {
 
     const dateToday = new Date();
@@ -11,7 +12,8 @@ export default function TodayDate() {
  
   return (
     <View style={styles.dateContainer}>
-      <Text style={styles.dateText}>Date du jour : {dateFrench}</Text>
+      <Ionicons name="today" size={18} color="white" />
+      <Text style={styles.dateText}> {dateFrench}</Text>
     </View>
   )
 }
@@ -19,11 +21,13 @@ export default function TodayDate() {
 const styles = StyleSheet.create({
     dateContainer: {
       height : 25,
-      width : 200,
+      width : 125,
       backgroundColor : '#3A5BC7',
       borderRadius : 10,
+      flexDirection :'row',
       justifyContent : 'center',
-      alignItems : 'center'
+      alignItems : 'center',
+      marginTop : 5,
     },
     dateText : {
         fontWeight : '700',

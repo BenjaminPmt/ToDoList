@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import TasksFilter from '../components/TasksFilter'
 import { getTasks, sqliteInit, deleteTasks } from '../database/db'
-import { AntDesign } from '@expo/vector-icons';
+import { FontAwesome6 } from '@expo/vector-icons';
 export default function Home({navigation}) {
 
   const [tasks, setTasks] = useState([]);
@@ -40,7 +40,6 @@ export default function Home({navigation}) {
   return (
     <View>
       <Header />
-      <TasksFilter />
       <SafeAreaView style={styles.containerTasks}>
       <FlatList 
 
@@ -50,7 +49,7 @@ export default function Home({navigation}) {
             <Text style={styles.text}>{item.task}</Text>
             <Pressable 
               onPress={() => handleDelete(item.id)}>
-            <AntDesign name="delete" size={24} color="black" />
+            <FontAwesome6 name="trash-alt" size={17} color="white" />
             </Pressable>
           </View>
         )}
@@ -69,12 +68,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     flexDirection : "row",
+    borderRadius : 15,
+    justifyContent : 'space-between'
   },
   text:{
     color: "white",
   },
   containerTasks:{
-    height : 600,
-    // backgroundColor : 'purple',
+    height : 650,
+    paddingTop : 25,
   }
 });

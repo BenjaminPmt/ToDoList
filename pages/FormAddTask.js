@@ -47,8 +47,8 @@ export default function FormAddTask({navigation}) {
       <Header />
       <ModalOneBtn 
         visible={modalNoTask}
-        titleHeader="Pas de tache"
-        textBodyModal="Vous devez mettre au moins 1 caractere pour la creation de la tache"
+        titleHeader="Erreur"
+        textBodyModal="Vous devez mettre au moins 1 caractere pour créer la tache"
         textBtn="Retour"
         onPressBtn={backModal}
         />
@@ -61,28 +61,46 @@ export default function FormAddTask({navigation}) {
         goToHome={goToHome}
         backToAdd={backModal}
       />
-      
-      <TextInput
-        style={styles.input}
-        placeholder="Ajouter une tâche"
-        onChangeText={setTask}
-        value={task}
-      />
-      <Button
-        title="Ajouter Tâche"
+      <View style={styles.container}>
+        <TextInput
+          style={styles.input}
+          placeholder="Ajouter une tâche"
+          onChangeText={setTask}
+          value={task}
+          maxLength={45}
+        />
+        <Pressable
         onPress={handleAddTask}
-      />
+        style={styles.button}
+        >
+          <Text style={{color:'white', fontWeight:'700'}}>Ajouter une tache</Text>
+        </Pressable>
+        
+       
+      </View>
+      
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    height : '100%',
+    justifyContent : 'center',
+    alignItems : 'center',
+    paddingBottom : 300,
+  },
   input: {
+    width : "80%",
     height: 40,
     margin: 12,
-    borderWidth: 1,
+    borderWidth: 3,
     padding: 10,
-  },modalContainer :{
+    borderRadius : 15,
+    borderColor : '#1F2D5C',
+  },
+  modalContainer :{
     flex : 1,
     justifyContent: "center",
     alignItems : 'center',
@@ -146,6 +164,14 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight :'700',
     textAlign :'center'
+  },
+  button:{
+    backgroundColor : '#1F2D5C',
+    width : '40%',
+    height : 35,
+    borderRadius : 15,
+    alignItems : 'center',
+    justifyContent : 'center'
   }
  
 });

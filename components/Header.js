@@ -3,15 +3,16 @@ import TodayDate from './TodayDate';
 export default function Header() {
   return (
     <View style={styles.headerContainer}>
-      <View style={styles.imageContainer}>
+      {/* <View style={styles.imageContainer}> */}
         <View style={styles.textContainer}>
           <Text style={{fontWeight : 700, color: '#FFFF', fontSize : 34}}>Bienvenue</Text>
-          <Text style={{fontWeight : 700, color: '#FFFF', fontSize : 24}}>Benjam</Text>
+          <Text style={{fontWeight : 700, color: '#FFFF', fontSize : 24}}>Sur votre To Do List</Text>
+          <TodayDate  />
         </View>
-          <Image source={require('../assets/profil_picture.jpg')} style={styles.image}/>
-      </View>
+          {/* <Image source={require('../assets/profil_picture.jpg')} style={styles.image}/> */}
+      {/* </View> */}
       <View  style={styles.dateContainer}>
-        <TodayDate  />
+        
       </View>
     </View>
   )
@@ -27,7 +28,8 @@ const styles = StyleSheet.create({
     padding: 10,
     },
     textContainer:{
-      flexDirection : "column"
+      flexDirection : "column",
+      padding : 20,
     },
     dateContainer : {
         height : 30,
@@ -38,9 +40,9 @@ const styles = StyleSheet.create({
     imageContainer: {
       height : 100,
       flexDirection : "row",
-        justifyContent:'space-between',
-        padding : 20,
-        width : '100%',
+      justifyContent:'space-between',
+      padding : 20,
+      width : '100%',
       },
       image: {
         width: 50, // Ajustez selon la taille souhaitée.
